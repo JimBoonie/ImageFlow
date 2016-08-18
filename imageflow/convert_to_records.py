@@ -15,18 +15,7 @@
 
 """Converts images to TFRecords file format with Example protos."""
 
-import os
 import tensorflow as tf
-
-
-tf.app.flags.DEFINE_string('directory', 'converted_data',
-                           'Directory to write the '
-                           'converted result')
-# tf.app.flags.DEFINE_integer('validation_size', 10000,
-#                             'Number of examples to separate from the training '
-#                             'ckpt for the validation set.')
-FLAGS = tf.app.flags.FLAGS
-
 
 def _int64_feature(value):
   return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
@@ -46,7 +35,7 @@ def convert_to(images, labels, name):
   cols = images.shape[2]
   depth = images.shape[3]
 
-  filename = os.path.join(FLAGS.directory, name + '.tfrecords')
+  filename = name '.tfrecords'
   print('Writing', filename)
   writer = tf.python_io.TFRecordWriter(filename)
   for index in range(num_examples):
